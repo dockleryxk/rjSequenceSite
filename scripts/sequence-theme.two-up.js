@@ -51,7 +51,7 @@ var options = {
 var mouseWheel = {
 
   // Only allow mousewheel navigation every x amount of ms
-  quietPeriod: 1000,
+  quietPeriod: 750,
 
   // Set this to the same length as the longest transition in Sequence
   animationTime: 300
@@ -127,8 +127,22 @@ mySequence.ready = function() {
     lastAnimation = timeNow;
   }
 
+  function upOne(e) {
+      e.preventDefault();
+      timeNow = new Date().getTime();
+
+      // Cancel scroll if currently animating or within quiet period
+      if (timeNow - lastAnimation < mouseWheel.quietPeriod + mouseWheel.animationTime) {
+          return;
+      }
+      mySequence.prev();
+
+      lastAnimation = timeNow;
+  }
+
   mySequence.utils.addEvent(document, "mousewheel", scroll);
   mySequence.utils.addEvent(document, "DOMMouseScroll", scroll);
+  mySequence.utils.addEvent(document.getElementById("contact-link"), "click", upOne);
 
   // Navigate between steps when certain buttons are pressed
   mySequence.utils.addEvent(document.body, "keyup", function(e) {

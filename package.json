@@ -1,14 +1,14 @@
 {
-  "name": "seq-theme-two-up",
+  "name": "rj-sequence-site",
   "version": "1.0.0",
-  "description": "A two column layout, one for showing content, the other a featured image",
+  "description": "Richard Jeffords home site",
   "license": "GPL-3.0",
-  "homepage": "http://sequencejs.com/themes/two-up/",
+  "homepage": "httpz://richardjeffords.com",
   "private": false,
-  "author": "Ian Lunn",
+  "author": "Richard Jeffords",
   "repository": {
     "type": "git",
-    "url": "https://github.com/SequenceJS/two-up/"
+    "url": "https://github.com/dockleryxk/two-up/"
   },
   "bugs": {
     "url": "https://github.com/SequenceJS/two-up/issues",
