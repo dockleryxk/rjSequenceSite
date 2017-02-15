@@ -6,7 +6,5 @@ tmp
 .tmp
 bower_components
 raw
-.idea
-.idea/*
-css
-css/*
+**/.idea
+**/css
