@@ -24,45 +24,87 @@ var sequenceElement = document.getElementById("sequence");
 // Place your Sequence options here to override defaults
 // See: http://sequencejs.com/documentation/#options
 var options = {
-  animateCanvas: true,
-  phaseThreshold: false,
-  preloader: true,
-  fadeStepWhenSkipped: false,
-  reverseWhenNavigatingBackwards: true,
-  swipeEvents: {
-    left: function(sequence) {
-      sequence.next();
+    animateCanvas: true,
+    phaseThreshold: false,
+    preloader: true,
+    fadeStepWhenSkipped: false,
+    reverseWhenNavigatingBackwards: true,
+    swipeEvents: {
+        left: function(sequence) {
+            sequence.next();
+        },
+        right: function(sequence) {
+            sequence.prev();
+        },
+        up: function(sequence) {
+            sequence.next();
+        },
+        down: function(sequence) {
+            sequence.prev();
+        }
     },
-    right: function(sequence) {
-      sequence.prev();
-    },
-    up: function(sequence) {
-      sequence.next();
-    },
-    down: function(sequence) {
-      sequence.prev();
+    fallback: {
+        speed: 300
     }
-  },
-  fallback: {
-    speed: 300
-  }
+}
+
+var recaptchaflg = false;
+
+function recaptchaCallback() {
+    recaptchaflg = true;
+}
+
+function recaptchaExpiredCallback() {
+    recaptchaflg = false;
 }
 
 var mouseWheel = {
 
-  // Only allow mousewheel navigation every x amount of ms
-  quietPeriod: 750,
+    // Only allow mousewheel navigation every x amount of ms
+    quietPeriod: 750,
 
-  // Set this to the same length as the longest transition in Sequence
-  animationTime: 300
+    // Set this to the same length as the longest transition in Sequence
+    animationTime: 300
 }
 
 // Launch Sequence on the element, and with the options we specified above
 var mySequence = sequence(sequenceElement, options);
 
+//TODO: finish recaptcha stuff
+function submitForm(e) {
+    e.preventDefault();
+    if(recaptchaflg) {
+        var form = document.querySelector("form");
+        var spinner = new Spinner().spin(form);
+        var request = new XMLHttpRequest();
+        request.open('POST', 'https://api.richardjeffords.com/siteMailer.php', true);
+        request.onload = function () {
+            if (request.status >= 200 && request.status < 400) {
+                // Success!
+                console.log(JSON.stringify(request, null, 4));
+                recaptchaflg = false;
+            } else {
+                // We reached our target server, but it returned an error
+
+            }
+            recaptchaflg = false;
+            grecaptcha.reset();
+            spinner.stop();
+        };
+
+        request.onerror = function () {
+            // There was a connection error of some sort
+            grecaptcha.reset();
+            spinner.stop();
+        };
+        request.send(new FormData(form));
+    }
+
+    return false;
+}
 
 function getWindowWidth() {
-  return window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    return window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 }
 
 // Determine Hammer directions required based on window width
@@ -70,119 +112,122 @@ function getWindowWidth() {
 // A window less than 769 allows left/right swiping
 function enableSwiping() {
 
-  if (mySequence.hammerTime === false) {
-    return;
-  }
+    if (mySequence.hammerTime === false) {
+        return;
+    }
 
-  windowWidth = getWindowWidth();
+    windowWidth = getWindowWidth();
 
-  if (windowWidth > 769) {
-    mySequence.hammerTime.get("swipe").set({direction: Hammer.DIRECTION_ALL});
-  } else {
-    mySequence.hammerTime.get("swipe").set({direction: Hammer.DIRECTION_HORIZONTAL});
-  }
+    if (windowWidth > 769) {
+        mySequence.hammerTime.get("swipe").set({direction: Hammer.DIRECTION_ALL});
+    } else {
+        mySequence.hammerTime.get("swipe").set({direction: Hammer.DIRECTION_HORIZONTAL});
+    }
 
-  return windowWidth;
+    return windowWidth;
 }
 
 mySequence.ready = function() {
 
-  var windowWidth,
-      lastAnimation = 0,
-      delta,
-      timeNow;
+    var windowWidth,
+        lastAnimation = 0,
+        delta,
+        timeNow;
 
-  // Get the windowWidth each time the window is resized
-  windowWidth = enableSwiping();
-  mySequence.throttledResize = function() {
+    // Get the windowWidth each time the window is resized
     windowWidth = enableSwiping();
-  }
-
-  function scroll(e) {
-
-    // Only allow mousewheel navigation above 769px
-    if (windowWidth < 769) {
-      return;
+    mySequence.throttledResize = function() {
+        windowWidth = enableSwiping();
     }
 
-    e.preventDefault();
+    function scroll(e) {
 
-    delta = e.wheelDelta || -e.detail;
-
-    deltaOfInterest = delta;
-    timeNow = new Date().getTime();
-
-    // Cancel scroll if currently animating or within quiet period
-    if (timeNow - lastAnimation < mouseWheel.quietPeriod + mouseWheel.animationTime) {
-      e.preventDefault();
-      return;
-    }
-
-    if (deltaOfInterest < 0) {
-      mySequence.next();
-    } else {
-      mySequence.prev();
-    }
-
-    lastAnimation = timeNow;
-  }
-
-  function upOne(e) {
-      e.preventDefault();
-      timeNow = new Date().getTime();
-
-      // Cancel scroll if currently animating or within quiet period
-      if (timeNow - lastAnimation < mouseWheel.quietPeriod + mouseWheel.animationTime) {
-          return;
-      }
-      mySequence.prev();
-
-      lastAnimation = timeNow;
-  }
-
-  mySequence.utils.addEvent(document, "mousewheel", scroll);
-  mySequence.utils.addEvent(document, "DOMMouseScroll", scroll);
-  mySequence.utils.addEvent(document.getElementById("contact-link"), "click", upOne);
-
-  // Navigate between steps when certain buttons are pressed
-  mySequence.utils.addEvent(document.body, "keyup", function(e) {
-
-    switch(e.keyCode) {
-
-      // If any of the following keys are pressed, go to the next slide:
-
-      // space, right arrow
-      case 32:
-      case 39:
-        e.preventDefault();
-        mySequence.next();
-      break;
-
-      // page down, down arrow (Large layout only)
-      case 34:
-      case 40:
-        if (windowWidth > 768) {
-          e.preventDefault();
-          mySequence.next();
+        // Only allow mousewheel navigation above 769px
+        if (windowWidth < 769) {
+            return;
         }
-      break;
 
-      // If any of the following keys are pressed, go to the previous slide:
-
-      // left arrow
-      case 37:
         e.preventDefault();
+
+        delta = e.wheelDelta || -e.detail;
+
+        deltaOfInterest = delta;
+        timeNow = new Date().getTime();
+
+        // Cancel scroll if currently animating or within quiet period
+        if (timeNow - lastAnimation < mouseWheel.quietPeriod + mouseWheel.animationTime) {
+            e.preventDefault();
+            return;
+        }
+
+        if (deltaOfInterest < 0) {
+            mySequence.next();
+        } else {
+            mySequence.prev();
+        }
+
+        lastAnimation = timeNow;
+    }
+
+    function upOne(e) {
+        e.preventDefault();
+        timeNow = new Date().getTime();
+
+        // Cancel scroll if currently animating or within quiet period
+        if (timeNow - lastAnimation < mouseWheel.quietPeriod + mouseWheel.animationTime) {
+            return;
+        }
         mySequence.prev();
-      break;
 
-      // page up, up arrow (Large layout only)
-      case 33:
-      case 38:
-        if (windowWidth > 768) {
-          e.preventDefault();
-          mySequence.prev();
-        }
-      break;
+        lastAnimation = timeNow;
     }
-  });
+
+    mySequence.utils.addEvent(document, "mousewheel", scroll);
+    mySequence.utils.addEvent(document, "DOMMouseScroll", scroll);
+    mySequence.utils.addEvent(document.getElementById("contact-link"), "click", upOne);
+    mySequence.utils.addEvent(document.forms.namedItem("contact-form"), "submit", submitForm);
+
+  /*
+   // Navigate between steps when certain buttons are pressed
+   mySequence.utils.addEvent(document.body, "keyup", function(e) {
+
+   switch(e.keyCode) {
+
+   // If any of the following keys are pressed, go to the next slide:
+
+   // space, right arrow
+   case 32:
+   case 39:
+   e.preventDefault();
+   mySequence.next();
+   break;
+
+   // page down, down arrow (Large layout only)
+   case 34:
+   case 40:
+   if (windowWidth > 768) {
+   e.preventDefault();
+   mySequence.next();
+   }
+   break;
+
+   // If any of the following keys are pressed, go to the previous slide:
+
+   // left arrow
+   case 37:
+   e.preventDefault();
+   mySequence.prev();
+   break;
+
+   // page up, up arrow (Large layout only)
+   case 33:
+   case 38:
+   if (windowWidth > 768) {
+   e.preventDefault();
+   mySequence.prev();
+   }
+   break;
+   }
+   });
+   */
 };

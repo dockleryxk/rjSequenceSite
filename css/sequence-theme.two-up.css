@@ -83,15 +83,17 @@ body {
 }
 
 .seq .seq-attribution a:focus,
-.seq .seq-attribution a:hover,
-.seq .grey-nav:focus,
-.seq .grey-nav:hover {
+.seq .seq-attribution a:hover {
   color: #000;
 }
 
 .seq .grey-nav {
   color: #a1abaf;
   text-decoration: none;
+}
+
+.seq .grey-nav:hover {
+  border-bottom: 2px solid #000;
 }
 
 .seq .seq-preload-circle {
