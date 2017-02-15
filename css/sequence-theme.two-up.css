@@ -66,36 +66,6 @@ body {
   font-size: 16px;
 }
 
-.seq .seq-attribution {
-  /* Credits */
-  position: relative;
-  display: block;
-  margin: 0 auto;
-  padding: .5em;
-  text-align: center;
-  line-height: 140%;
-}
-
-.seq .seq-attribution a {
-  color: #444;
-  text-decoration: none;
-  font-weight: 700;
-}
-
-.seq .seq-attribution a:focus,
-.seq .seq-attribution a:hover {
-  color: #000;
-}
-
-.seq .grey-nav {
-  color: #a1abaf;
-  text-decoration: none;
-}
-
-.seq .grey-nav:hover {
-  border-bottom: 2px solid #000;
-}
-
 .seq .seq-preload-circle {
   /* Color of preloader indicator circles */
   fill: black;
@@ -439,6 +409,15 @@ body {
   margin-top: -16px;
 }
 
+.seq .grey-nav {
+  color: #a1abaf;
+  text-decoration: none;
+}
+
+.seq .grey-nav:hover {
+  border-bottom: 2px solid black;
+}
+
 @media only screen and (max-width: 768px) {
   .seq.seq-reversed .seq-content {
     /* Don't allow content to reset to its start position when reversed */
@@ -737,4 +716,4 @@ body {
   }
 }
 
-/*# sourceMappingURL=sequence-theme.rjSequenceSite.css.map */
+/*# sourceMappingURL=sequence-theme.two-up.css.map */

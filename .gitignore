@@ -7,3 +7,4 @@ tmp
 bower_components
 raw
 .idea
+.idea/*
