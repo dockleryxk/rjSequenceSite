@@ -24,7 +24,7 @@
 $sequenceWidth: 100%;
 $sequenceHeight: 100%;
 
-$seqDuration: .3s;
+$seqDuration: "0.3s";
 
 $heroHeightSmall: 200px;
 $heroHeightMedium: 300px;
@@ -395,13 +395,40 @@ body {
     }
   }
 
-  .grey-nav {
+  a.grey-nav {
     color: #a1abaf;
     text-decoration: none;
+    font-weight: bold;
+    -webkit-transition: color 0.2s ease-in;
+    -moz-transition: color 0.2s ease-in;
+    -o-transition: color 0.2s ease-in;
+    transition: color 0.2s ease-in;
+
+    //-webkit-transition: border 0.2s ease-in;
+    //-moz-transition: border 0.2s ease-in;
+    //-o-transition: border 0.2s ease-in;
+    //transition: border 0.2s ease-in;
 
     &:hover {
-      border-bottom: 2px solid black;
+      color: #64723e;
+      //border-bottom: 2px solid #000000;
     }
+  }
+
+  div.grey-nav {
+    font-size: 1.25em;
+  }
+
+  .social {
+    fill: #a1abaf;
+
+    &:hover {
+      fill: #64723e;
+    }
+  }
+
+  .no-ul a {
+    text-decoration: none;
   }
 }
 
@@ -626,6 +653,13 @@ body {
         margin-top: 0;
       }
     }
+  }
+
+  .hvr-underline-from-center:before {
+    background: #000000;
+    height: 2px;
+    -webkit-transition-duration: .2s;
+    transition-duration: .2s;
   }
 }
 
