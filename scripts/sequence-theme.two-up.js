@@ -57,7 +57,7 @@ function recaptchaExpiredCallback() { recaptchaflg = false; }
 var mouseWheel = {
 
     // Only allow mousewheel navigation every x amount of ms
-    quietPeriod: 750,
+    quietPeriod: 900,
 
     // Set this to the same length as the longest transition in Sequence
     animationTime: 300
@@ -183,7 +183,6 @@ mySequence.ready = function() {
     mySequence.utils.addEvent(document.getElementById("contact-link"), "click", upOne);
     mySequence.utils.addEvent(document.forms.namedItem("contact-form"), "submit", submitForm);
 
-  /*
    // Navigate between steps when certain buttons are pressed
    mySequence.utils.addEvent(document.body, "keyup", function(e) {
 
@@ -192,11 +191,11 @@ mySequence.ready = function() {
    // If any of the following keys are pressed, go to the next slide:
 
    // space, right arrow
-   case 32:
-   case 39:
-   e.preventDefault();
-   mySequence.next();
-   break;
+   // case 32:
+   // case 39:
+   // e.preventDefault();
+   // mySequence.next();
+   // break;
 
    // page down, down arrow (Large layout only)
    case 34:
@@ -210,10 +209,10 @@ mySequence.ready = function() {
    // If any of the following keys are pressed, go to the previous slide:
 
    // left arrow
-   case 37:
-   e.preventDefault();
-   mySequence.prev();
-   break;
+   // case 37:
+   // e.preventDefault();
+   // mySequence.prev();
+   // break;
 
    // page up, up arrow (Large layout only)
    case 33:
@@ -225,5 +224,4 @@ mySequence.ready = function() {
    break;
    }
    });
-   */
 };
