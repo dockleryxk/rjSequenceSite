@@ -50,13 +50,9 @@ var options = {
 
 var recaptchaflg = false;
 
-function recaptchaCallback() {
-    recaptchaflg = true;
-}
+function recaptchaCallback() { recaptchaflg = true; }
 
-function recaptchaExpiredCallback() {
-    recaptchaflg = false;
-}
+function recaptchaExpiredCallback() { recaptchaflg = false; }
 
 var mouseWheel = {
 
@@ -70,7 +66,6 @@ var mouseWheel = {
 // Launch Sequence on the element, and with the options we specified above
 var mySequence = sequence(sequenceElement, options);
 
-//TODO: finish recaptcha stuff
 function submitForm(e) {
     e.preventDefault();
     if(recaptchaflg) {
@@ -94,6 +89,7 @@ function submitForm(e) {
 
         request.onerror = function () {
             // There was a connection error of some sort
+            recaptchaflg = false;
             grecaptcha.reset();
             spinner.stop();
         };
