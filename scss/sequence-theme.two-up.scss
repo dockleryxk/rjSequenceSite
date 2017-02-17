@@ -24,7 +24,7 @@
 $sequenceWidth: 100%;
 $sequenceHeight: 100%;
 
-$seqDuration: "0.3s";
+$seqDuration: "0.2s";
 
 $heroHeightSmall: 200px;
 $heroHeightMedium: 300px;
@@ -347,7 +347,7 @@ body {
   .seq-feature > div {
     width: 100%;
     height: 100%;
-    background-repeat: none;
+    background-repeat: no-repeat;
     background-position: 50% 50%;
     background-size: cover;
 
@@ -421,6 +421,10 @@ body {
 
   .social {
     fill: #a1abaf;
+    -webkit-transition: fill 0.3s ease-in, transform 0.3s ease-out;
+    -moz-transition: fill 0.3s ease-in, transform 0.3s ease-out;
+    -o-transition: fill 0.3s ease-in, transform 0.3s ease-out;
+    transition: fill 0.3s ease-in, transform 0.3s ease-out;
 
     &:hover {
       fill: #64723e;
