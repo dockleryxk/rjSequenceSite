@@ -57,6 +57,16 @@ body {
     border: 4px solid #BDBDBD;
   }
 
+  .ul-heading {
+    font-weight: 800 !important;
+    display: block;
+    width: 100%;
+    border-bottom: 1px solid #BDBDBD;
+    margin-bottom: 5px !important;
+    margin-top: 5px !important;
+    line-height: 1.1em !important;
+  }
+
   form {
     background: rgba(158, 158, 36, 0.5);
     padding: 10px;
@@ -717,6 +727,19 @@ body {
   /* Increase the title font-size in rjSequenceSite layout */
   .seq .seq-content h2 {
     font-size: 2.25em;
+  }
+
+  form {
+    max-width: 468px;
+  }
+
+  #about-parent {
+    text-align: center;
+  }
+
+  .about-block {
+    max-width: 568px;
+    text-align: justify;
   }
 }
 
