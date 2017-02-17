@@ -1,18 +1,14 @@
 {
   "name": "rj-sequence-site",
   "version": "1.0.0",
-  "description": "Richard Jeffords home site",
+  "description": "Richard's home site",
   "license": "GPL-3.0",
-  "homepage": "httpz://richardjeffords.com",
+  "homepage": "https://richardjeffords.com",
   "private": false,
   "author": "Richard Jeffords",
   "repository": {
     "type": "git",
     "url": "https://github.com/dockleryxk/two-up/"
-  },
-  "bugs": {
-    "url": "https://github.com/SequenceJS/two-up/issues",
-    "email": "bugs@sequencejs.com"
   },
   "keywords": [
     "sequence",

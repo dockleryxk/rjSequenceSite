@@ -183,45 +183,45 @@ mySequence.ready = function() {
     mySequence.utils.addEvent(document.getElementById("contact-link"), "click", upOne);
     mySequence.utils.addEvent(document.forms.namedItem("contact-form"), "submit", submitForm);
 
-   // Navigate between steps when certain buttons are pressed
-   mySequence.utils.addEvent(document.body, "keyup", function(e) {
+    // Navigate between steps when certain buttons are pressed
+    mySequence.utils.addEvent(document.body, "keyup", function(e) {
 
-   switch(e.keyCode) {
+        switch(e.keyCode) {
 
-   // If any of the following keys are pressed, go to the next slide:
+            // If any of the following keys are pressed, go to the next slide:
 
-   // space, right arrow
-   // case 32:
-   // case 39:
-   // e.preventDefault();
-   // mySequence.next();
-   // break;
+            // space, right arrow
+            // case 32:
+            // case 39:
+            // e.preventDefault();
+            // mySequence.next();
+            // break;
 
-   // page down, down arrow (Large layout only)
-   case 34:
-   case 40:
-   if (windowWidth > 768) {
-   e.preventDefault();
-   mySequence.next();
-   }
-   break;
+            // page down, down arrow (Large layout only)
+            case 34:
+            case 40:
+                if (windowWidth > 768) {
+                    e.preventDefault();
+                    mySequence.next();
+                }
+                break;
 
-   // If any of the following keys are pressed, go to the previous slide:
+            // If any of the following keys are pressed, go to the previous slide:
 
-   // left arrow
-   // case 37:
-   // e.preventDefault();
-   // mySequence.prev();
-   // break;
+            // left arrow
+            // case 37:
+            // e.preventDefault();
+            // mySequence.prev();
+            // break;
 
-   // page up, up arrow (Large layout only)
-   case 33:
-   case 38:
-   if (windowWidth > 768) {
-   e.preventDefault();
-   mySequence.prev();
-   }
-   break;
-   }
-   });
+            // page up, up arrow (Large layout only)
+            case 33:
+            case 38:
+                if (windowWidth > 768) {
+                    e.preventDefault();
+                    mySequence.prev();
+                }
+                break;
+        }
+    });
 };

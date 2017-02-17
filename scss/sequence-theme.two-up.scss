@@ -51,6 +51,31 @@ body {
   /* Some basic styles */
   font-family: sans-serif;
   -webkit-text-size-adjust: 100%;
+  color: #263238;
+
+  .hvr-outline-out:before {
+    border: 4px solid #BDBDBD;
+  }
+
+  form {
+    background: rgba(158, 158, 36, 0.5);
+    padding: 10px;
+    border-top: 4px solid #BDBDBD;
+  }
+
+  .pure-button {
+    background: #BDBDBD;
+  }
+
+  .hvr-shutter-out-horizontal {
+    &:hover {
+      color: #BDBDBD;
+    }
+
+    &:before {
+      background: #607D8B;
+    }
+  }
 
   .seq-screen,
   .seq-canvas,
@@ -81,7 +106,7 @@ body {
 
   .seq-preload-circle {
     /* Color of preloader indicator circles */
-    fill: black;
+    fill: #263238;
   }
 
   .seq-in {
@@ -146,7 +171,7 @@ body {
 
     path {
       /* Color of the swipe icon */
-      fill: white;
+      fill: #BDBDBD;
     }
   }
 
@@ -276,7 +301,7 @@ body {
     left: 0;
     right: auto;
     padding: 0 1em;
-    background: white;
+    background: #607D8B;
     text-align: center;
     font-size: 0;
     font-family: 'Merriweather', serif;
@@ -304,6 +329,12 @@ body {
       line-height: 160%;
       font-size: 1em;
       font-weight: 300;
+    }
+  }
+
+  .step2 {
+    .seq-content {
+      text-align: justify;
     }
   }
 
@@ -395,8 +426,8 @@ body {
     }
   }
 
-  a.grey-nav {
-    color: #a1abaf;
+  a {
+    color: #BDBDBD;
     text-decoration: none;
     font-weight: bold;
     -webkit-transition: color 0.2s ease-in;
@@ -410,7 +441,7 @@ body {
     //transition: border 0.2s ease-in;
 
     &:hover {
-      color: #64723e;
+      color: #9E9D24;
       //border-bottom: 2px solid #000000;
     }
   }
@@ -420,14 +451,14 @@ body {
   }
 
   .social {
-    fill: #a1abaf;
+    fill: #BDBDBD;
     -webkit-transition: fill 0.3s ease-in, transform 0.3s ease-out;
     -moz-transition: fill 0.3s ease-in, transform 0.3s ease-out;
     -o-transition: fill 0.3s ease-in, transform 0.3s ease-out;
     transition: fill 0.3s ease-in, transform 0.3s ease-out;
 
     &:hover {
-      fill: #64723e;
+      fill: #9E9D24;
     }
   }
 
@@ -545,6 +576,7 @@ body {
         margin: 0;
         margin-bottom: 1em;
         font-size: 16px;
+        background: #BDBDBD;
 
         &:hover .seq-tooltip {
           opacity: 1;
@@ -582,7 +614,7 @@ body {
       font-family: 'Oswald', sans-serif;
       font-size: .875em;
       font-weight: 400;
-      color: black;
+      color: #263238;
       @include prefixed(transform, "translateY(-30%) translateZ(0)");
       @include prefixed(transition-duration, ".3s");
       @include prefixed(transition-property, "transform, opacity");
@@ -660,7 +692,7 @@ body {
   }
 
   .hvr-underline-from-center:before {
-    background: #000000;
+    background: #263238;
     height: 2px;
     -webkit-transition-duration: .2s;
     transition-duration: .2s;
