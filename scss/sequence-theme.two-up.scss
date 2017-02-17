@@ -61,6 +61,14 @@ body {
     background: rgba(158, 158, 36, 0.5);
     padding: 10px;
     border-top: 4px solid #BDBDBD;
+    min-height: 150px;
+
+    .success-div {
+      display: block;
+      width: 100%;
+      min-height: 100px;
+
+    }
   }
 
   .pure-button {

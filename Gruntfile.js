@@ -51,7 +51,9 @@ module.exports = function(grunt) {
         {src: ['bower_components/sequencejs/scripts/sequence.js'], dest: 'scripts/sequence.js'},
         {src: ['bower_components/sequencejs/scripts/sequence.min.js'], dest: 'scripts/sequence.min.js'},
         {src: ['bower_components/hammerjs/hammer.min.js'], dest: 'scripts/hammer.min.js'},
-        {src: ['bower_components/imagesloaded/imagesloaded.pkgd.min.js'], dest: 'scripts/imagesloaded.pkgd.min.js'}
+        {src: ['bower_components/imagesloaded/imagesloaded.pkgd.min.js'], dest: 'scripts/imagesloaded.pkgd.min.js'},
+        {src: ['node_modules/tingle.js/dist/tingle.min.css'], dest: 'css/tingle.min.css'},
+        {src: ['node_modules/tingle.js/dist/tingle.min.js'], dest: 'scripts/tingle.min.js'}
         ]
       }
     },

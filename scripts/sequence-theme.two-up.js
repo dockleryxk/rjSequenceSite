@@ -66,6 +66,10 @@ var mouseWheel = {
 // Launch Sequence on the element, and with the options we specified above
 var mySequence = sequence(sequenceElement, options);
 
+function bbb () {
+    document.querySelector("form").innerHTML = '<div cass="success-div"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Success or failure message here. You are a loser!</div>';
+}
+
 function submitForm(e) {
     e.preventDefault();
     if(recaptchaflg) {
@@ -78,6 +82,7 @@ function submitForm(e) {
                 // Success!
                 console.log(JSON.stringify(request, null, 4));
                 recaptchaflg = false;
+                form.reset();
             } else {
                 // We reached our target server, but it returned an error
 
