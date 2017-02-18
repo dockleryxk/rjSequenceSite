@@ -66,9 +66,24 @@ var mouseWheel = {
 // Launch Sequence on the element, and with the options we specified above
 var mySequence = sequence(sequenceElement, options);
 
-function bbb () {
-    document.querySelector("form").innerHTML = '<div cass="success-div"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Success or failure message here. You are a loser!</div>';
-}
+var modal = new tingle.modal({
+    footer: false,
+    stickyFooter: false,
+    closeLabel: "Close",
+    // cssClass: ['custom-class-1', 'custom-class-2'],
+    onOpen: function() {
+        // console.log('modal open');
+    },
+    onClose: function() {
+        // console.log('modal closed');
+    },
+    beforeClose: function() {
+        // here's goes some logic
+        // e.g. save content before closing the modal
+        return true; // close the modal
+        // return false; // nothing happens
+    }
+});
 
 function submitForm(e) {
     e.preventDefault();
@@ -81,7 +96,6 @@ function submitForm(e) {
             if (request.status >= 200 && request.status < 400) {
                 // Success!
                 console.log(JSON.stringify(request, null, 4));
-                recaptchaflg = false;
                 form.reset();
             } else {
                 // We reached our target server, but it returned an error
@@ -90,6 +104,8 @@ function submitForm(e) {
             recaptchaflg = false;
             grecaptcha.reset();
             spinner.stop();
+            modal.setContent(request.responseText);
+            modal.open();
         };
 
         request.onerror = function () {
@@ -97,6 +113,8 @@ function submitForm(e) {
             recaptchaflg = false;
             grecaptcha.reset();
             spinner.stop();
+            modal.setContent(request.responseText);
+            modal.open();
         };
         request.send(new FormData(form));
     }
@@ -126,6 +144,10 @@ function enableSwiping() {
     }
 
     return windowWidth;
+}
+
+function clearForm() {
+
 }
 
 mySequence.ready = function() {
