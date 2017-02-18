@@ -29,18 +29,23 @@ var options = {
     preloader: true,
     fadeStepWhenSkipped: false,
     reverseWhenNavigatingBackwards: true,
+    reverseTimingFunctionWhenNavigatingBackwards: true,
     swipeEvents: {
         left: function(sequence) {
             sequence.next();
+            checkScreen();
         },
         right: function(sequence) {
             sequence.prev();
+            checkScreen();
         },
         up: function(sequence) {
             sequence.next();
+            checkScreen();
         },
         down: function(sequence) {
             sequence.prev();
+            checkScreen();
         }
     },
     fallback: {
@@ -76,6 +81,7 @@ var modal = new tingle.modal({
     },
     onClose: function() {
         // console.log('modal closed');
+        resetModal();
     },
     beforeClose: function() {
         // here's goes some logic
@@ -84,6 +90,30 @@ var modal = new tingle.modal({
         // return false; // nothing happens
     }
 });
+
+function resetModal () {
+    modal.destroy();
+
+    modal = new tingle.modal({
+        footer: false,
+        stickyFooter: false,
+        closeLabel: "Close",
+        // cssClass: ['custom-class-1', 'custom-class-2'],
+        onOpen: function() {
+            // console.log('modal open');
+        },
+        onClose: function() {
+            resetModal();
+            // console.log('modal closed');
+        },
+        beforeClose: function() {
+            // here's goes some logic
+            // e.g. save content before closing the modal
+            return true; // close the modal
+            // return false; // nothing happens
+        }
+    });
+}
 
 function submitForm(e) {
     e.preventDefault();
@@ -95,16 +125,16 @@ function submitForm(e) {
         request.onload = function () {
             if (request.status >= 200 && request.status < 400) {
                 // Success!
-                console.log(JSON.stringify(request, null, 4));
+                // console.log(JSON.stringify(request, null, 4));
+                modal.setContent("<h2>Success!</h2><p>" + request.responseText + "</p>");
                 form.reset();
             } else {
                 // We reached our target server, but it returned an error
-
+                modal.setContent("<h2>Error</h2><p>" + request.responseText + "</p>");
             }
             recaptchaflg = false;
             grecaptcha.reset();
             spinner.stop();
-            modal.setContent(request.responseText);
             modal.open();
         };
 
@@ -113,7 +143,7 @@ function submitForm(e) {
             recaptchaflg = false;
             grecaptcha.reset();
             spinner.stop();
-            modal.setContent(request.responseText);
+            modal.setContent("<h2>Error</h2><p>" + request.responseText + "</p>");
             modal.open();
         };
         request.send(new FormData(form));
@@ -122,8 +152,50 @@ function submitForm(e) {
     return false;
 }
 
+function checkScreen(id) {
+    windowWidth = getWindowWidth();
+    if (windowWidth > 769) unfixPageHeight();
+    else fixPageHeight(id);
+}
+
+mySequence.nextPhaseStarted = function(id) {
+    windowWidth = getWindowWidth();
+    if (windowWidth > 769) unfixPageHeight();
+    else fixPageHeight(id);
+}
+
+function fixPageHeight(id) {
+    // console.log("fixPageHeight");
+    featureHeight = document.getElementById("feature" + id).offsetHeight;
+    contentHeight = document.getElementById("content" + id).offsetHeight;
+    stepHeight = featureHeight + contentHeight;
+    screenHeight = getWindowHeight();
+    // console.log("stepHeight: " + stepHeight);
+    // console.log("screenHeight: " + screenHeight);
+
+    if (stepHeight > screenHeight) {
+        // console.log("stepHeight > screenHeight (" + stepHeight + " > " + screenHeight + ")");
+        document.getElementsByClassName("seq-canvas")[0].style.height = String(stepHeight) + "px";
+        // console.log("changed height of step" + id + " to " + String(stepHeight) + "px");
+    }
+
+    else {
+        document.getElementsByClassName("seq-canvas")[0].style.height = "100vh";
+        // console.log("changed height of step" + id + " to " + "100vh");
+    }
+}
+
+function unfixPageHeight() {
+    // console.log("unfixPageHeight");
+    document.getElementsByClassName("seq-canvas")[0].style.height = "100%";
+}
+
 function getWindowWidth() {
     return window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+}
+
+function getWindowHeight() {
+    return window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 }
 
 // Determine Hammer directions required based on window width
@@ -139,15 +211,12 @@ function enableSwiping() {
 
     if (windowWidth > 769) {
         mySequence.hammerTime.get("swipe").set({direction: Hammer.DIRECTION_ALL});
-    } else {
+    }
+    else {
         mySequence.hammerTime.get("swipe").set({direction: Hammer.DIRECTION_HORIZONTAL});
     }
 
     return windowWidth;
-}
-
-function clearForm() {
-
 }
 
 mySequence.ready = function() {
@@ -159,8 +228,10 @@ mySequence.ready = function() {
 
     // Get the windowWidth each time the window is resized
     windowWidth = enableSwiping();
+    checkScreen(1);
     mySequence.throttledResize = function() {
         windowWidth = enableSwiping();
+        checkScreen(mySequence.currentStepId);
     }
 
     function scroll(e) {
@@ -185,7 +256,8 @@ mySequence.ready = function() {
 
         if (deltaOfInterest < 0) {
             mySequence.next();
-        } else {
+        }
+        else {
             mySequence.prev();
         }
 
@@ -205,8 +277,8 @@ mySequence.ready = function() {
         lastAnimation = timeNow;
     }
 
-    mySequence.utils.addEvent(document, "mousewheel", scroll);
-    mySequence.utils.addEvent(document, "DOMMouseScroll", scroll);
+    // mySequence.utils.addEvent(document, "mousewheel", scroll);
+    // mySequence.utils.addEvent(document, "DOMMouseScroll", scroll);
     mySequence.utils.addEvent(document.getElementById("contact-link"), "click", upOne);
     mySequence.utils.addEvent(document.forms.namedItem("contact-form"), "submit", submitForm);
 

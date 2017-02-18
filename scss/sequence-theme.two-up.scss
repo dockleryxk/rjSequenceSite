@@ -41,6 +41,10 @@ body {
   transition-duration: .2s;
 }
 
+button:focus {
+  outline: none!important;
+}
+
 .seq {
 
   /* Dimensions */
@@ -111,6 +115,8 @@ body {
 
     /* Remove the 4px gap between steps */
     font-size: 0;
+
+    height: 100vh;
   }
 
   .seq-canvas > * {
@@ -324,6 +330,7 @@ body {
     text-align: center;
     font-size: 0;
     font-family: 'Merriweather', serif;
+    overflow:auto;
 
     /* Hide the content until it is active and fades in */
     opacity: 0;
@@ -475,6 +482,8 @@ body {
     -moz-transition: fill 0.3s ease-in, transform 0.3s ease-out;
     -o-transition: fill 0.3s ease-in, transform 0.3s ease-out;
     transition: fill 0.3s ease-in, transform 0.3s ease-out;
+
+    margin: 15px 5px;
 
     &:hover {
       fill: #9E9D24;
@@ -728,7 +737,7 @@ body {
     max-width: 468px;
   }
 
-  #about-parent {
+  #content2 {
     text-align: center;
   }
 
