@@ -53,12 +53,6 @@ var options = {
     }
 }
 
-var recaptchaflg = false;
-
-function recaptchaCallback() { recaptchaflg = true; }
-
-function recaptchaExpiredCallback() { recaptchaflg = false; }
-
 var mouseWheel = {
 
     // Only allow mousewheel navigation every x amount of ms
@@ -117,41 +111,34 @@ function resetModal () {
 
 function submitForm(token) {
     console.log(token);
-    // e.preventDefault();
-    if(recaptchaflg) {
-        var form = document.querySelector("form");
-        var spinner = new Spinner().spin(form);
-        var request = new XMLHttpRequest();
-        console.log(form.form);
-        // request.open('POST', 'https://api.richardjeffords.com/siteMailer.php', true);
-        // request.onload = function () {
-        //     if (request.status >= 200 && request.status < 400) {
-        //         // Success!
-        //         // console.log(JSON.stringify(request, null, 4));
-        //         modal.setContent("<h2>Success!</h2><p>" + request.responseText + "</p>");
-        //         form.reset();
-        //     } else {
-        //         // We reached our target server, but it returned an error
-        //         modal.setContent("<h2>Error</h2><p>" + request.responseText + "</p>");
-        //     }
-        //     recaptchaflg = false;
-        //     grecaptcha.reset();
-        //     spinner.stop();
-        //     modal.open();
-        // };
-        //
-        // request.onerror = function () {
-        //     // There was a connection error of some sort
-        //     recaptchaflg = false;
-        //     grecaptcha.reset();
-        //     spinner.stop();
-        //     modal.setContent("<h2>Error</h2><p>" + request.responseText + "</p>");
-        //     modal.open();
-        // };
-        // request.send(new FormData(form));
-    }
-
-    return false;
+    var form = document.querySelector("form");
+    var spinner = new Spinner().spin(form);
+    var data = new FormData(form);
+    data.append('g-recaptcha-response', token);
+    var request = new XMLHttpRequest();
+    request.open('POST', 'https://api.richardjeffords.com/siteMailer.php', true);
+    request.onload = function () {
+        if (request.status >= 400) {
+            // We reached our target server, but it returned an error
+            modal.setContent("<h2>Error</h2><p>" + request.responseText + "</p>");
+        } else {
+            // Success!
+            // console.log(JSON.stringify(request, null, 4));
+            modal.setContent("<h2>Success!</h2><p>" + request.responseText + "</p>");
+            form.reset();
+        }
+        grecaptcha.reset();
+        spinner.stop();
+        modal.open();
+    };
+    request.onerror = function () {
+        // There was a connection error of some sort
+        grecaptcha.reset();
+        spinner.stop();
+        modal.setContent("<h2>Error</h2><p>" + request.responseText + "</p>");
+        modal.open();
+    };
+    request.send(data);
 }
 
 function checkScreen(id) {
@@ -164,7 +151,7 @@ mySequence.nextPhaseStarted = function(id) {
     windowWidth = getWindowWidth();
     if (windowWidth > 769) unfixPageHeight();
     else fixPageHeight(id);
-}
+};
 
 function fixPageHeight(id) {
     // console.log("fixPageHeight");
@@ -234,7 +221,7 @@ mySequence.ready = function() {
     mySequence.throttledResize = function() {
         windowWidth = enableSwiping();
         checkScreen(mySequence.currentStepId);
-    }
+    };
 
     function scroll(e) {
 
