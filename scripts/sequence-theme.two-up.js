@@ -115,38 +115,40 @@ function resetModal () {
     });
 }
 
-function submitForm(e) {
-    e.preventDefault();
+function submitForm(token) {
+    console.log(token);
+    // e.preventDefault();
     if(recaptchaflg) {
         var form = document.querySelector("form");
         var spinner = new Spinner().spin(form);
         var request = new XMLHttpRequest();
-        request.open('POST', 'https://api.richardjeffords.com/siteMailer.php', true);
-        request.onload = function () {
-            if (request.status >= 200 && request.status < 400) {
-                // Success!
-                // console.log(JSON.stringify(request, null, 4));
-                modal.setContent("<h2>Success!</h2><p>" + request.responseText + "</p>");
-                form.reset();
-            } else {
-                // We reached our target server, but it returned an error
-                modal.setContent("<h2>Error</h2><p>" + request.responseText + "</p>");
-            }
-            recaptchaflg = false;
-            grecaptcha.reset();
-            spinner.stop();
-            modal.open();
-        };
-
-        request.onerror = function () {
-            // There was a connection error of some sort
-            recaptchaflg = false;
-            grecaptcha.reset();
-            spinner.stop();
-            modal.setContent("<h2>Error</h2><p>" + request.responseText + "</p>");
-            modal.open();
-        };
-        request.send(new FormData(form));
+        console.log(form.form);
+        // request.open('POST', 'https://api.richardjeffords.com/siteMailer.php', true);
+        // request.onload = function () {
+        //     if (request.status >= 200 && request.status < 400) {
+        //         // Success!
+        //         // console.log(JSON.stringify(request, null, 4));
+        //         modal.setContent("<h2>Success!</h2><p>" + request.responseText + "</p>");
+        //         form.reset();
+        //     } else {
+        //         // We reached our target server, but it returned an error
+        //         modal.setContent("<h2>Error</h2><p>" + request.responseText + "</p>");
+        //     }
+        //     recaptchaflg = false;
+        //     grecaptcha.reset();
+        //     spinner.stop();
+        //     modal.open();
+        // };
+        //
+        // request.onerror = function () {
+        //     // There was a connection error of some sort
+        //     recaptchaflg = false;
+        //     grecaptcha.reset();
+        //     spinner.stop();
+        //     modal.setContent("<h2>Error</h2><p>" + request.responseText + "</p>");
+        //     modal.open();
+        // };
+        // request.send(new FormData(form));
     }
 
     return false;
@@ -291,10 +293,10 @@ mySequence.ready = function() {
 
             // space, right arrow
             // case 32:
-            // case 39:
-            // e.preventDefault();
-            // mySequence.next();
-            // break;
+            case 39:
+            e.preventDefault();
+            mySequence.next();
+            break;
 
             // page down, down arrow (Large layout only)
             case 34:
@@ -308,10 +310,10 @@ mySequence.ready = function() {
             // If any of the following keys are pressed, go to the previous slide:
 
             // left arrow
-            // case 37:
-            // e.preventDefault();
-            // mySequence.prev();
-            // break;
+            case 37:
+            e.preventDefault();
+            mySequence.prev();
+            break;
 
             // page up, up arrow (Large layout only)
             case 33:

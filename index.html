@@ -45,7 +45,7 @@ $$$$$$\             \$$$$$$  |$$$$$$$$\ $$$$$$$$\                 $$ |     $$$$$
       padding: 0;
     }
   </style>
-  <script src='https://www.google.com/recaptcha/api.js'></script>
+  <script src='https://www.google.com/recaptcha/api.js' async defer></script>
 </head>
 <body>
 
@@ -133,7 +133,7 @@ $$$$$$\             \$$$$$$  |$$$$$$$$\ $$$$$$$$\                 $$ |     $$$$$
         <div id="content3" data-seq class="seq-content seq-half seq-half-left seq-valign">
           <div>
             <h2 class="hvr-buzz-out">Get in Touch</h2>
-            <form name="contact-form" class="pure-form pure-g" action="https://api.richardjeffords.com/siteMailer.php" method="post">
+            <form name="contact-form" class="pure-form pure-g">
               <fieldset class="pure-group pure-u-1">
                 <input name="name" type="text" class="pure-input-1" placeholder="Name*" maxlength="50" required>
                 <input name="email" type="email" class="pure-input-1" placeholder="Email*" maxlength="50" required>
@@ -145,9 +145,9 @@ $$$$$$\             \$$$$$$  |$$$$$$$$\ $$$$$$$$\                 $$ |     $$$$$
               </fieldset>
 
               <div>
-              <div class="g-recaptcha" data-sitekey="6LfVlxUUAAAAAPPDv3f9y5RSbzMllXqJWeWT5jzZ" data-callback="recaptchaCallback" data-expired-callback="recaptchaExpiredCallback"></div>
+              <!--<div class="g-recaptcha" data-size="invisible" data-badge="bottomleft" data-sitekey="6LfVlxUUAAAAAPPDv3f9y5RSbzMllXqJWeWT5jzZ" data-callback="recaptchaCallback" data-expired-callback="recaptchaExpiredCallback"></div>-->
               </div>
-              <button style="margin-top: 10px;" type="submit" class="pure-button pure-input-1 hvr-shutter-out-horizontal">Send</button>
+              <button style="margin-top: 10px;" type="submit" class="pure-button pure-input-1 hvr-shutter-out-horizontal g-recaptcha" data-sitekey="6LfVlxUUAAAAAPPDv3f9y5RSbzMllXqJWeWT5jzZ" data-callback="submitForm" data-badge="bottomleft">Send</button>
             </form>
           </div>
         </div>
