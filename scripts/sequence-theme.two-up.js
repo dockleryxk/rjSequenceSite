@@ -110,7 +110,6 @@ function resetModal () {
 }
 
 function submitForm(token) {
-    console.log(token);
     var form = document.querySelector("form");
     var spinner = new Spinner().spin(form);
     var data = new FormData(form);
