@@ -154,22 +154,28 @@ mySequence.nextPhaseStarted = function(id) {
 
 function fixPageHeight(id) {
     // console.log("fixPageHeight");
-    featureHeight = document.getElementById("feature" + id).offsetHeight;
-    contentHeight = document.getElementById("content" + id).offsetHeight;
-    stepHeight = featureHeight + contentHeight;
-    screenHeight = getWindowHeight();
-    // console.log("stepHeight: " + stepHeight);
-    // console.log("screenHeight: " + screenHeight);
+    try {
+        featureHeight = document.getElementById("feature" + id).offsetHeight;
+        contentHeight = document.getElementById("content" + id).offsetHeight;
+        stepHeight = featureHeight + contentHeight;
+        screenHeight = getWindowHeight();
+        // console.log("stepHeight: " + stepHeight);
+        // console.log("screenHeight: " + screenHeight);
 
-    if (stepHeight > screenHeight) {
-        // console.log("stepHeight > screenHeight (" + stepHeight + " > " + screenHeight + ")");
-        document.getElementsByClassName("seq-canvas")[0].style.height = String(stepHeight) + "px";
-        // console.log("changed height of step" + id + " to " + String(stepHeight) + "px");
+
+        if (stepHeight > screenHeight) {
+            // console.log("stepHeight > screenHeight (" + stepHeight + " > " + screenHeight + ")");
+            document.getElementsByClassName("seq-canvas")[0].style.height = String(stepHeight) + "px";
+            // console.log("changed height of step" + id + " to " + String(stepHeight) + "px");
+        }
+
+        else {
+            document.getElementsByClassName("seq-canvas")[0].style.height = "100vh";
+            // console.log("changed height of step" + id + " to " + "100vh");
+        }
     }
-
-    else {
-        document.getElementsByClassName("seq-canvas")[0].style.height = "100vh";
-        // console.log("changed height of step" + id + " to " + "100vh");
+    catch (err) {
+        console.log(err);
     }
 }
 
