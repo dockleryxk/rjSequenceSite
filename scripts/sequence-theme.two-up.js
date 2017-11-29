@@ -140,6 +140,11 @@ function submitForm(token) {
     request.send(data);
 }
 
+function cv() {
+    modal.setContent("<h2>It's Old!</h2><p>Although I am still proud of this CV, I want to note that it is rather outdated. <a href='/cv.pdf' target='_blank'>Click here</a> to see it anyways.</p>");
+    modal.open();
+}
+
 function checkScreen(id) {
     windowWidth = getWindowWidth();
     if (windowWidth > 769) unfixPageHeight();
