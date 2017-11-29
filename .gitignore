@@ -8,4 +8,5 @@ bower_components
 raw
 **/.idea
 **/css
+**/angle_docs
 package-lock.json
