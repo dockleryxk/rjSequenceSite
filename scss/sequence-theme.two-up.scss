@@ -481,6 +481,10 @@ button:focus {
     font-size: 1.25em;
   }
 
+  a.grey-nav {
+    cursor: pointer;
+  }
+
   .social {
     fill: #BDBDBD;
     -webkit-transition: fill 0.3s ease-in, transform 0.3s ease-out;
