@@ -51,7 +51,7 @@ var options = {
     fallback: {
         speed: 300
     }
-}
+};
 
 var mouseWheel = {
 
@@ -60,7 +60,7 @@ var mouseWheel = {
 
     // Set this to the same length as the longest transition in Sequence
     animationTime: 300
-}
+};
 
 // Launch Sequence on the element, and with the options we specified above
 var mySequence = sequence(sequenceElement, options);
@@ -322,4 +322,9 @@ mySequence.ready = function() {
                 break;
         }
     });
+};
+
+window.onload = function () {
+    if(window.location.hash === '#about')   mySequence.goTo(2);
+    if(window.location.hash === '#contact') mySequence.goTo(3);
 };

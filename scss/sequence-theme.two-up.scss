@@ -477,12 +477,20 @@ button:focus {
     }
   }
 
-  div.grey-nav {
+  nav.grey-nav {
     font-size: 1.25em;
+  }
+
+  a.hidden-link {
+    display: none;
   }
 
   a.grey-nav {
     cursor: pointer;
+
+    span.hidden-url {
+      display: none;
+    }
   }
 
   .social {

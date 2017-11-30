@@ -104,7 +104,23 @@ $$$$$$\             \$$$$$$  |$$$$$$$$\ $$$$$$$$\                 $$ |     $$$$$
             <br>
             <h3 class="hvr-pop">Developer</h3>, <h3 class="hvr-pop">Musician</h3>, <h3 class="hvr-pop">Entrepreneur</h3>
             <br><br>
-            <div class="grey-nav"><a class="hvr-underline-from-center grey-nav" onclick="cv()">CV</a> // <a class="hvr-underline-from-center grey-nav" href="https://progblog.io" target="_blank">Blog</a> // <a href="#contact" rel="contact" class="hvr-underline-from-center grey-nav" id="contact-link">Contact</a></div>
+            <nav class="grey-nav" itemscope="itemscope" itemtype="http://www.schema.org/SiteNavigationElement">
+              <a href="#about" class="hidden-link">
+                <span itemprop="url" class="url">https://richardjeffords.com/#about</span>
+                <span itemprop="name">About</span>
+              </a>
+              <a class="hvr-underline-from-center grey-nav" itemprop="url" onclick="cv()">
+                <span itemprop="url" class="hidden-url">https://richardjeffords.com/cv.pdf</span>
+                <span itemprop="name">CV</span>
+              </a> //
+              <a class="hvr-underline-from-center grey-nav" itemprop="url" href="https://progblog.io" target="_blank">
+                <span itemprop="name">Blog</span>
+              </a> //
+              <a href="#contact" rel="contact" class="hvr-underline-from-center grey-nav" id="contact-link">
+                <span itemprop="url" class="url">https://richardjeffords.com/#contact</span>
+                <span itemprop="name">Contact</span>
+              </a>
+            </nav>
             <a href="https://www.linkedin.com/in/rajeffords/" target="_blank">
               <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" class="social hvr-sink">
                 <path d="M30.7 0H1.3C0.6 0 0 0.6 0 1.3v29.3C0 31.4 0.6 32 1.3 32h29.3c0.7 0 1.3-0.6 1.3-1.3V1.3C32 0.6 31.4 0 30.7 0zM9.5 27.3H4.7V12h4.8V27.3zM7.1 9.9c-1.5 0-2.8-1.2-2.8-2.8 0-1.5 1.2-2.8 2.8-2.8 1.5 0 2.8 1.2 2.8 2.8C9.9 8.7 8.6 9.9 7.1 9.9zM27.3 27.3h-4.7v-7.4c0-1.8 0-4-2.5-4 -2.5 0-2.8 1.9-2.8 3.9v7.6h-4.7V12H17v2.1h0.1c0.6-1.2 2.2-2.5 4.5-2.5 4.8 0 5.7 3.2 5.7 7.3V27.3z" />
@@ -127,20 +143,52 @@ $$$$$$\             \$$$$$$  |$$$$$$$$\ $$$$$$$$\                 $$ |     $$$$$
         <div id="feature2" data-seq class="seq-feature seq-half seq-half-right">
           <div style="background-image: url(images/websitepic1.jpg)">
             <!-- This image is hidden via CSS and is only here for accessibility. The image shown is actually a background-image set via an inline style above -->
-            <img src="images/websitepic1.jpg" alt="my love" />
+            <img src="images/websitepic1.jpg" alt="Space Bass" />
           </div>
         </div>
         <div id="content2" data-seq class="seq-content seq-half seq-half-left seq-valign">
           <div class="about-block">
             <h2 style="text-align: center">About Me</h2>
             <h3 class="ul-heading">For Everyone: </h3>
-            Firstly, I quit my job at the beginning of 2017 to find something new. In the time since then, I have built a company with two of my friends from college. That company is <a href="https://storagepug.com" target="_blank">StoragePug</a>! The self storage industry is my newest love, and I plan to stay here for a long time. Click the link to learn more. I am a cat-dad who is always up for adventure. I've toured with my band, <a href="https://wearelions.bandcamp.com" target="_blank">Lions</a>, all around the country and I love hiking // camping // backpacking. Other things I love include riding my motorcycle, disc golf, and chasing sunsets.
+            <p>
+              Firstly, I quit my job at the beginning of 2017 to find something new.
+              In the time since then, I have built a company with two of my friends from college.
+              That company is <a href="https://storagepug.com" target="_blank">StoragePug</a>!
+              The self storage industry is my newest love, and I plan and hope to stay here for a long time.
+            </p>
+            <p>
+              Second, I'd like to think I'm good at spending the little free time that I have.
+              I've toured with my band, <a href="https://wearelions.bandcamp.com" target="_blank">Lions</a>,
+              all around the country and I love hiking // camping // backpacking.
+              Other things I love include riding my motorcycle, disc golf, and chasing sunsets.
+            </p>
             <br><br>
             <h3 class="ul-heading">For Engineers: </h3>
-            I am a full-stack web developer with a focus on back-end. I've worked in both solo and team development settings. My recent projects have been built in Symfony and Angular, but I'm always open to new frameworks and believe that the technology should suit the project. I enjoy learning new languages, frameworks, and technologies. In addition to the Web, I've written system applications for image processing and AI..
+            <p>
+              I am a full-stack web developer with a focus on back-end.
+              I've worked in both solo and team development settings.
+              My recent projects have been built in Symfony and Angular,
+              but I'm always open to new frameworks and believe that the technology should suit the project.
+              I enjoy learning new languages, frameworks, and technologies.
+              In addition to the Web, I've written system applications for image processing and AI.
+            </p>
             <br><br>
             <h3 class="ul-heading">About this Site: </h3>
-            I built this site in pure javascript (i.e. <a href="http://youmightnotneedjquery.com" target="_blank">no jQuery</a>) with the help of <a href="http://npmjs.com" target="_blank">npm</a>, <a href="http://npmjs.com" target="_blank">grunt</a>, and <a href="https://bower.io" target="_blank">bower</a>. The frameworks used were <a href="http://ianlunn.github.io/Hover/" target="_blank">hover.css</a>, <a href="http://www.sequencejs.com/" target="_blank">sequence.js</a>, <a href="https://purecss.io/" target="_blank">pure.css</a>, <a href="http://sass-lang.com/" target="_blank">sass</a>, <a href="http://spin.js.org/" target="_blank">spin.js</a>, and <a href="https://robinparisi.github.io/tingle/" target="_blank">tingle.js</a>. For the server side of the contact form, I wrote <a href="https://github.com/dockleryxk/easy-recaptcha-mailer" target="_blank">a little PHP script</a>.
+            <p>
+              I built this site in pure javascript
+              (i.e. <a href="http://youmightnotneedjquery.com" target="_blank">no jQuery</a>)
+              with the help of <a href="http://npmjs.com" target="_blank">npm</a>,
+              <a href="http://npmjs.com" target="_blank">grunt</a>,
+              and <a href="https://bower.io" target="_blank">bower</a>.
+              The frameworks used were <a href="http://ianlunn.github.io/Hover/" target="_blank">hover.css</a>,
+              <a href="http://www.sequencejs.com/" target="_blank">sequence.js</a>,
+              <a href="https://purecss.io/" target="_blank">pure.css</a>,
+              <a href="http://sass-lang.com/" target="_blank">sass</a>,
+              <a href="http://spin.js.org/" target="_blank">spin.js</a>,
+              and <a href="https://robinparisi.github.io/tingle/" target="_blank">tingle.js</a>.
+              For the server side of the contact form, I wrote
+              <a href="https://github.com/dockleryxk/easy-recaptcha-mailer" target="_blank">a little PHP script</a>.
+            </p>
           </div>
         </div>
       </li>
@@ -148,7 +196,7 @@ $$$$$$\             \$$$$$$  |$$$$$$$$\ $$$$$$$$\                 $$ |     $$$$$
         <div id="feature3" data-seq class="seq-feature seq-half seq-half-right">
           <div style="background-image: url(images/websitepic2.jpg)">
             <!-- This image is hidden via CSS and is only here for accessibility. The image shown is actually a background-image set via an inline style above -->
-            <img src="images/websitepic2.jpg" alt="I need to find a better picture to use, I just need to snap it first :)" />
+            <img src="images/websitepic2.jpg" alt="Tail of the Dragon" />
           </div>
         </div>
         <div id="content3" data-seq class="seq-content seq-half seq-half-left seq-valign">
