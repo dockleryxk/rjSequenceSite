@@ -110,6 +110,10 @@ function resetModal () {
 }
 
 function submitForm(token) {
+    ga('send', 'event', {
+        'eventCategory': 'contactForm',
+        'eventAction': 'submitField'
+    });
     var form = document.querySelector("form");
     var spinner = new Spinner().spin(form);
     var data = new FormData(form);
@@ -140,8 +144,19 @@ function submitForm(token) {
     request.send(data);
 }
 
+function cvClicked() {
+    ga('send', 'event', {
+        'eventCategory': 'cv',
+        'eventAction': 'cvOpened'
+    });
+}
+
 function cv() {
-    modal.setContent("<h2>It's Old!</h2><p>Although I am still proud of this CV, I want to note that it is rather outdated. <a href='/cv.pdf' target='_blank'>Click here</a> to see it anyways.</p>");
+    ga('send', 'event', {
+        'eventCategory': 'cv',
+        'eventAction': 'modalOpened'
+    });
+    modal.setContent("<h2>It's Old!</h2><p>Although I am still proud of this CV, I want to note that it is rather outdated. <a href='/cv.pdf' target='_blank' onclick='cvClicked()'>Click here</a> to see it anyways.</p>");
     modal.open();
 }
 

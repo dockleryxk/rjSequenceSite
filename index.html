@@ -55,17 +55,23 @@ $$$$$$\             \$$$$$$  |$$$$$$$$\ $$$$$$$$\                 $$ |     $$$$$
 
       ga('create', 'UA-76246852-1', 'auto');
       ga('send', 'pageview');
+      
+      ga(function (tracker) {
+          // Logs the trackers name.
+          // (Note: default trackers are given the name "t0")
+          console.log(tracker.get('name'));
+
+          // Logs the client ID for the current user.
+          console.log(tracker.get('clientId'));
+
+          // Logs the URL of the referring site (if available).
+          console.log(tracker.get('referrer'));
+      });
   </script>
 
   <!--[if lt IE 9]>
   <link href="/css/sequence-theme.two-up-ie8.css" rel="stylesheet" media="all">
   <![endif]-->
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-    }
-  </style>
   <script src='https://www.google.com/recaptcha/api.js' async defer></script>
 
   <script type="application/ld+json">
@@ -239,13 +245,13 @@ $$$$$$\             \$$$$$$  |$$$$$$$$\ $$$$$$$$\                 $$ |     $$$$$
             <h2 class="hvr-buzz-out">Get in Touch</h2>
             <form name="contact-form" class="pure-form pure-g">
               <fieldset class="pure-group pure-u-1">
-                <input name="name" type="text" class="pure-input-1" placeholder="Name*" maxlength="50" required>
-                <input name="email" type="email" class="pure-input-1" placeholder="Email*" maxlength="50" required>
+                <input name="name" type="text" class="pure-input-1" placeholder="Name*" maxlength="50" required onfocus="ga('send', 'event', {'eventCategory': 'contactForm', 'eventAction': 'nameFieldClicked'})">
+                <input name="email" type="email" class="pure-input-1" placeholder="Email*" maxlength="50" required onfocus="ga('send', 'event', {'eventCategory': 'contactForm', 'eventAction': 'emailFieldClicked'})">
               </fieldset>
 
               <fieldset class="pure-group pure-u-1">
-                <input name="subject" type="text" class="pure-input-1" placeholder="Subject*" maxlength="50" required>
-                <textarea name="message" class="pure-input-1" maxlength="500"></textarea>
+                <input name="subject" type="text" class="pure-input-1" placeholder="Subject*" maxlength="50" required onfocus="ga('send', 'event', {'eventCategory': 'contactForm', 'eventAction': 'subjectFieldClicked'})">
+                <textarea name="message" class="pure-input-1" maxlength="500" placeholder="Message*" onfocus="ga('send', 'event', {'eventCategory': 'contactForm', 'eventAction': 'messageFieldClicked'})"></textarea>
               </fieldset>
 
               <div>
