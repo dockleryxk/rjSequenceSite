@@ -110,10 +110,6 @@ function resetModal () {
 }
 
 function submitForm(token) {
-    ga('send', 'event', {
-        'eventCategory': 'contactForm',
-        'eventAction': 'submitField'
-    });
     var form = document.querySelector("form");
     var spinner = new Spinner().spin(form);
     var data = new FormData(form);
@@ -123,10 +119,18 @@ function submitForm(token) {
     request.onload = function () {
         if (request.status >= 400) {
             // We reached our target server, but it returned an error
+            ga('send', 'event', {
+                'eventCategory': 'contactForm',
+                'eventAction': 'submitErrorFromServer'
+            });
             modal.setContent("<h2>Error</h2><p>" + request.responseText + "</p>");
         } else {
             // Success!
             // console.log(JSON.stringify(request, null, 4));
+            ga('send', 'event', {
+                'eventCategory': 'contactForm',
+                'eventAction': 'submitSuccess'
+            });
             modal.setContent("<h2>Success!</h2><p>" + request.responseText + "</p>");
             form.reset();
         }
@@ -136,6 +140,10 @@ function submitForm(token) {
     };
     request.onerror = function () {
         // There was a connection error of some sort
+        ga('send', 'event', {
+            'eventCategory': 'contactForm',
+            'eventAction': 'submitConnectionError'
+        });
         grecaptcha.reset();
         spinner.stop();
         modal.setContent("<h2>Error</h2><p>" + request.responseText + "</p>");
@@ -181,7 +189,6 @@ function fixPageHeight(id) {
         screenHeight = getWindowHeight();
         // console.log("stepHeight: " + stepHeight);
         // console.log("screenHeight: " + screenHeight);
-
 
         if (stepHeight > screenHeight) {
             // console.log("stepHeight > screenHeight (" + stepHeight + " > " + screenHeight + ")");
