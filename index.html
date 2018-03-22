@@ -94,26 +94,6 @@ $$$$$$\             \$$$$$$  |$$$$$$$$\ $$$$$$$$\                 $$ |     $$$$$
 
       ga('create', 'UA-76246852-1', 'auto');
       ga('send', 'pageview');
-      if (document.referrer.match(/google\.([a-zA-Z]{2,5})/gi) && document.referrer.match(/cd/gi)) {
-var myString = document.referrer;
-var r = myString.match(/cd=(.*?)&/);
-var rank = parseInt(r[1]);
-var kw = myString.match(/q=(.*?)&/);
-var moteur = myString.split('/')[2];
-
-if (kw[1].length > 0) {
-var keyWord = decodeURI(kw[1]);
-} else {
-keyWord = "(not provided)";
-}
-
-var p = document.location.pathname;
-ga('send', 'pageview');
-
-ga('send', 'event', 'Rank Tracker', keyWord, p, rank, { nonInteraction: true });
-}
-
-
   </script>
 
   <!--[if lt IE 9]>
