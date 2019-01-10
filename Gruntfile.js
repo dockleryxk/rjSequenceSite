@@ -2,58 +2,58 @@
 
 var LIVERELOAD_PORT = 35729;
 var SERVER_PORT = 8000;
-var lrSnippet = require('connect-livereload')({port: LIVERELOAD_PORT});
+var lrSnippet = require('connect-livereload')({ port: LIVERELOAD_PORT });
 var mountFolder = function (connect, dir) {
-    return connect.static(require('path').resolve(dir));
+  return connect.static(require('path').resolve(dir));
 };
 
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
   require('time-grunt')(grunt);
 
   require('load-grunt-tasks')(grunt, {
-		scope: 'devDependencies',
-		config: 'package.json',
-		pattern: ['grunt-*']
-	});
+    scope: 'devDependencies',
+    config: 'package.json',
+    pattern: ['grunt-*']
+  });
 
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
     connect: {
-			options: {
-				port: SERVER_PORT,
-				hostname: 'localhost'
-			},
-			livereload: {
-				options: {
-					base: '/',
-					middleware: function (connect) {
-						return [
-							lrSnippet,
-							mountFolder(connect, '')
-						];
-					}
-				}
-			}
-		},
+      options: {
+        port: SERVER_PORT,
+        hostname: 'localhost'
+      },
+      livereload: {
+        options: {
+          base: '/',
+          middleware: function (connect) {
+            return [
+              lrSnippet,
+              mountFolder(connect, '')
+            ];
+          }
+        }
+      }
+    },
 
-		open: {
-			server: {
-				path: 'http://localhost:' + SERVER_PORT
-			}
-		},
+    open: {
+      server: {
+        path: 'http://localhost:' + SERVER_PORT
+      }
+    },
 
     copy: {
       main: {
         files: [
-        {src: ['bower_components/sequencejs/scripts/sequence.js'], dest: 'scripts/sequence.js'},
-        {src: ['bower_components/sequencejs/scripts/sequence.min.js'], dest: 'scripts/sequence.min.js'},
-        {src: ['bower_components/hammerjs/hammer.min.js'], dest: 'scripts/hammer.min.js'},
-        {src: ['bower_components/imagesloaded/imagesloaded.pkgd.min.js'], dest: 'scripts/imagesloaded.pkgd.min.js'},
-        {src: ['node_modules/tingle.js/dist/tingle.min.css'], dest: 'css/tingle.min.css'},
-        {src: ['node_modules/tingle.js/dist/tingle.min.js'], dest: 'scripts/tingle.min.js'}
+          { src: ['bower_components/sequencejs/scripts/sequence.js'], dest: 'scripts/sequence.js' },
+          { src: ['bower_components/sequencejs/scripts/sequence.min.js'], dest: 'scripts/sequence.min.js' },
+          { src: ['bower_components/hammerjs/hammer.min.js'], dest: 'scripts/hammer.min.js' },
+          { src: ['bower_components/imagesloaded/imagesloaded.pkgd.min.js'], dest: 'scripts/imagesloaded.pkgd.min.js' },
+          { src: ['node_modules/tingle.js/dist/tingle.min.css'], dest: 'css/tingle.min.css' },
+          { src: ['node_modules/tingle.js/dist/tingle.min.js'], dest: 'scripts/tingle.min.js' }
         ]
       }
     },
@@ -91,7 +91,7 @@ module.exports = function(grunt) {
         dest: 'css/',
         ext: '.css',
         extDot: 'last',
-        rename: function(dest, src) {
+        rename: function (dest, src) {
           return dest + src.replace("scss", "css");
         }
       }
@@ -100,10 +100,10 @@ module.exports = function(grunt) {
     autoprefixer: {
       options: {
         browsers: [
-        'last 2 version',
-        'ie 7',
-        'ie 8',
-        'ie 9']
+          'last 2 version',
+          'ie 7',
+          'ie 8',
+          'ie 9']
       },
 
       main: {
@@ -134,7 +134,7 @@ module.exports = function(grunt) {
           cwd: 'scripts/',
           src: ['*.js', '!*.min.js'],
           dest: 'scripts/',
-          rename: function(dest, src) {
+          rename: function (dest, src) {
             return dest + src.replace(".js", ".min.js");
           }
         }]
